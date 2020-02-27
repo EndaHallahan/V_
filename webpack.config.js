@@ -1,0 +1,64 @@
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
+module.exports = {
+  entry: {
+    "v_": './src/buildEntry.js',
+    "v_.min": './src/buildEntry.js',
+    "v_ui": './src/v_.scss',
+    "v_ui.min": './src/v_.scss'
+  },
+  mode: "production",
+  target: "web",
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'build')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sassOptions: {
+                outputStyle: "expanded",
+                minimize: false,
+                indentType: "tab",
+                indentWidth: 1,
+              }
+            }
+          }
+        ]
+      },
+    ]
+  },
+  plugins: [
+    new FixStyleOnlyEntriesPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
+  ],
+  externals: {
+    "zxcvbn": true
+  },
+  optimization: {
+    minimize: true,
+    mergeDuplicateChunks: false,
+    minimizer: [
+      new TerserPlugin({
+        test: /\.min\.js$/i
+      }),
+      new OptimizeCSSAssetsPlugin({
+        assetNameRegExp: /\.min\.css$/i
+      }),
+     ],
+  },
+};

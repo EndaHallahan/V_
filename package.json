@@ -1,0 +1,32 @@
+{
+  "name": "V_",
+  "version": "1.0.0",
+  "description": "The most conveinient validation library you'll ever meet.",
+  "main": "src/V_.js",
+  "scripts": {
+    "test": "mocha --require esm",
+    "build": "webpack --config webpack.config.js"
+  },
+  "keywords": [
+    "validation",
+    "validations"
+  ],
+  "author": "RB Underwood",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^3.4.2",
+    "esm": "^3.2.25",
+    "jsdom": "^16.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "mocha": "^7.0.1",
+    "node-sass": "^4.13.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.2",
+    "terser-webpack-plugin": "^2.3.5",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-fix-style-only-entries": "^0.4.0",
+    "zxcvbn": "^4.4.2"
+  }
+}

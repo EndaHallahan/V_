@@ -1,0 +1,43 @@
+$errorCol: #bb0000;
+
+label[data-v_char-counter] {
+	&::after { 
+		content: attr(data-v_char-counter);
+		font-size: 1rem;
+		color: slategray;
+	}
+	/* For browsers that aren't Edge */
+	&:focus-within::after { 
+		content: attr(data-v_char-counter);
+		font-size: 1rem;
+		color: slategray;
+	}
+	&:not(:focus-within)::after { 
+		content: "";
+	}
+}
+
+label[data-v_error-output] {
+	&::after {
+		content: attr(data-v_error-output);
+		font-size: 1rem;
+		color: $errorCol;
+	}
+	/* For browsers that aren't Edge */
+	&:not(:focus-within)::after { 
+		content: attr(data-v_error-output);
+		font-size: 1rem;
+		color: $errorCol;
+	}
+	&:focus-within::after { 
+		content: "";
+	}
+	&:not(:focus-within) {
+		&:not([data-v_error-output=""]) {
+			input, textarea {
+				outline: 2px solid $errorCol;
+				outline-offset: 1px;
+			}
+		}
+	}
+}
