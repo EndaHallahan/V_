@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>V_ Demo</title>
+		<link rel="stylesheet" href="v_ui.css" type="text/css">
+		<script src="v_.js"></script>
+		<style>
+			section { 
+				width: 80%;
+				max-width: 40rem;
+				margin: 0 auto;
+				display: grid;
+				font-size: 1.2rem;
+			}
+			label {
+				display: block;
+				margin: .5rem;
+				margin-bottom: 1rem;
+			}
+			input[type="text"], input[type="email"], input[type="password"], textarea {
+				width: 100%;
+				max-width: 40rem;
+				display: block;
+			}
+			textarea {
+				min-height: 5rem;
+			}
+			button[type="submit"] {
+				min-height: 2rem;
+				min-width: 5rem;
+				font-size: 1rem;
+				cursor: pointer;
+				float: right;
+			}
+			label[data-v_char-counter] {
+				position: relative;
+			}
+			label[data-v_char-counter]:focus-within::after {
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+			h1, h2, p {
+				text-align: center;
+			}
+			table {
+				margin: 0 auto;
+				border-collapse: collapse;
+			}
+			td {
+				border: 1px solid black;
+				padding: .3rem .7rem;
+			}
+			td:first-child {
+				color: white;
+				background-color: black;
+			}
+			td:not(:first-child) {
+				text-align: center;
+			}
+			td[colspan] {
+				font-family: monospace;
+			}
+			tr:not(:last-child) td:first-child {
+				border-bottom: 1px solid white;
+			}
+
+		</style>
+	</head>
+	<body>
+		<section>
+			<h1>V_ Form Validation Demo</h1>
+			<p><i>Not a single line of Javascript needed to be written to validate this form.</i></p>
+			<form data-v_form>
+				<label data-v_error-output>Enter a number between 5 and 10:
+					<input type="text" data-v_is-number data-v_value-between="5, 10">
+				</label>
+				<label data-v_error-output>Enter a Gmail email address:
+					<input type="email" data-v_is-email-with-domain="gmail.com">
+				</label>
+				<label data-v_error-output>Enter a URL:
+					<input type="text" data-v_is-url>
+				</label>
+				<label data-v_error-output>Enter a Github URL:
+					<input type="text" data-v_is-url-with-domain="github.com">
+				</label>
+				<label data-v_error-output data-v_password-output> Password strength test - light green or higher passes.
+					<input type="password" data-v_password-strength-requirement="3" name="password-check">
+				</label>
+				<label data-v_error-output> This field must match the one above it.
+					<input type="password" data-v_matches-field="password-check">
+				</label>
+				<label data-v_char-counter>Character counting
+					<textarea data-v_length-less-than="255"></textarea>
+				</label>
+				<button type="submit">Submit</button>
+			</form>
+			<h1>Get V_</h1>
+			<table>
+				<tr>
+					<td>
+						v_.js
+					</td>
+					<td>
+						<a href="v_.min.js">minified</a>
+					</td>
+					<td>
+						<a href="v_.js">unminified</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						v_manual.js
+					</td>
+					<td>
+						<a href="v_manual.min.js">minified</a>
+					</td>
+					<td>
+						<a href="v_manual.js">unminified</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						v_ui.css
+					<td>
+						<a href="v_ui.min.css">minified</a>
+					</td>
+					<td>
+						<a href="v_ui.css">unminified</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Node.JS
+					</td>
+					<td colspan="2">
+						$ npm install v_
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Yarn
+					</td>
+					<td colspan="2">
+						$ yarn add v_
+					</td>
+				</tr>
+			</table>
+			<p><a href="https://github.com/EndaHallahan/V_">Documentation on Github</a>
+		</section>
+	</body>
+</html>
