@@ -3,13 +3,16 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    "v_": './src/buildEntry.js',
-    "v_.min": './src/buildEntry.js',
-    "v_ui": './src/v_.scss',
-    "v_ui.min": './src/v_.scss'
+    "v_": './src/js/autoEntry.js',
+    "v_.min": './src/js/autoEntry.js',
+    "v_manual": './src/js/manualEntry.js',
+    "v_manual.min": './src/js/manualEntry.js',
+    "v_ui": './src/scss/v_.scss',
+    "v_ui.min": './src/scss/v_.scss'
   },
   mode: "production",
   target: "web",
@@ -45,6 +48,9 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
+    new CopyPlugin([
+      {from: './src/html'}
+    ]),
   ],
   externals: {
     "zxcvbn": true

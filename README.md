@@ -58,13 +58,13 @@ To use these, simply put them in the head of your HTML:
 V\_ is also available as a Node.JS module, and can be installed from NPM:
 
 ```bash
-$ npm install v_
+$ npm install v_underscore
 ```
 
 Or through Yarn:
 
 ```bash
-$ yarn add v_
+$ yarn add v_underscore
 ```
 
 ## How does V\_ work?
