@@ -1,12 +1,12 @@
 {
   "name": "v_underscore",
-  "version": "1.0.0",
-  "description": "The most conveinient little validation library you'll ever meet.",
+  "version": "1.0.2",
+  "description": "The most convenient little validation library you'll ever meet.",
   "keywords": [
     "validation",
     "validations"
   ],
-  "website": "https://endahallahan.github.io/V_/",
+  "homepage": "https://endahallahan.github.io/V_/",
   "repository": "https://github.com/EndaHallahan/V_",
   "main": "src/js/V_.js",
   "scripts": {
