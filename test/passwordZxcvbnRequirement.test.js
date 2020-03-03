@@ -1,6 +1,6 @@
 import {strict as assert} from "assert";
 import {JSDOM} from "jsdom";
-import {v_ify, V_} from "../src/v_.js";
+import {v_ify, V_} from "../src/js/v_.js";
 import {default as zxcvbn} from "zxcvbn";
 
 // Simulate Zxcvbn in global (window) namespace
@@ -16,7 +16,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_passwordVxcvbnRequirement = "1";
-			assert.throws(() => {testVal.v_passwordZxcvbnRequirement(testInput, "troubadour")}, Error);
+			assert.throws(() => {testVal.v_passwordZxcvbnRequirement(testInput, "troubadour", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -24,7 +24,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_password-zxcvbn-requirement", "");
-			assert.throws(() => {testVal.v_passwordZxcvbnRequirement(testInput, "troubadour")}, Error);
+			assert.throws(() => {testVal.v_passwordZxcvbnRequirement(testInput, "troubadour", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -32,7 +32,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_passwordZxcvbnRequirement = "5";
-			assert.throws(() => {testVal.v_passwordZxcvbnRequirement(testInput, "troubadour")}, Error);
+			assert.throws(() => {testVal.v_passwordZxcvbnRequirement(testInput, "troubadour", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -40,7 +40,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_passwordZxcvbnRequirement = "1";
-			assert.ok(!testVal.v_passwordZxcvbnRequirement(testInput, undefined));
+			assert.ok(!testVal.v_passwordZxcvbnRequirement(testInput, undefined, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -48,7 +48,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_passwordZxcvbnRequirement = "1";
-			assert.ok(!testVal.v_passwordZxcvbnRequirement(testInput, null));
+			assert.ok(!testVal.v_passwordZxcvbnRequirement(testInput, null, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -56,7 +56,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_passwordZxcvbnRequirement = "4";
-			assert.ok(!testVal.v_passwordZxcvbnRequirement(testInput, "pass"));
+			assert.ok(!testVal.v_passwordZxcvbnRequirement(testInput, "pass", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -64,7 +64,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_passwordZxcvbnRequirement = "1";
-			assert.ok(testVal.v_passwordZxcvbnRequirement(testInput, "Correct Horse Battery Staple"));
+			assert.ok(testVal.v_passwordZxcvbnRequirement(testInput, "Correct Horse Battery Staple", " "));
 			assert.ok(!testInput.validity.customError);
 			done();
 		});

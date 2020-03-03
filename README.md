@@ -124,19 +124,39 @@ V_ exports, or makes available globally to the page, two items: the `V_` class a
 
 ### The `V_` Object
 
-Under the hood, V\_ is really just the application of V_ objects to forms. You can do this yourself using the V\_ constructor:
+#### Constructor
+
+Under the hood, V\_ is really just the application of V\_ objects to forms. You can do this yourself using the V\_ constructor:
+
+| Function | Description |
+| ---------|------------ |
+| `new V_([form][, options])` | Creates a new V\_ object. `form` is an HTML form element; if specified, validations will be automatically applied to that form. `options` is an object containing properties that affect how the V_ object functions; see below for more information. |
 
 ```Javascript
 	let validator = new V_();
 ```
 
-The constructor can also be called on a form, which will automatically set up validations for you:
+The constructor can be called on a form, which will automatically set up validations for you:
 
 ```Javascript
 	let validator = new V_(myFormElement);
 ```
 
-If you do not want to do this, you can use the `setValidations` method, which takes a form element as an argument:
+You can also pass an options object to the constructor:
+
+```Javascript
+	let validator = new V_({
+		messages: {
+			// Can be used to specify custom validation faliure messages on a per-validation basis. Ex:
+			v_isInteger: "Please enter a number.",
+			v_isEmail: "Email address, if you please.",
+		}
+	});
+```
+
+#### Methods
+
+In addition to passing a form to the constructor, validations can also be set using the `setValidations` method, which takes a form element as an argument:
 
 ```Javascript
 	let validator = new V_();
