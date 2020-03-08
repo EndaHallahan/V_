@@ -1,6 +1,6 @@
 {
   "name": "v_underscore",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "The most convenient little validation library you'll ever meet.",
   "keywords": [
     "form",
@@ -16,7 +16,7 @@
   },
   "author": "rb_",
   "license": "MIT",
-  "dependancies": {
+  "dependencies": {
     "esm": "^3.2.25"
   },
   "devDependencies": {
