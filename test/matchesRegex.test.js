@@ -1,6 +1,6 @@
 import {strict as assert} from "assert";
 import {JSDOM} from "jsdom";
-import {v_ify, V_} from "../src/v_.js";
+import {v_ify, V_} from "../src/js/v_.js";
 
 describe("Validation Unit Tests", () => {
 	const { document } = (new JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
@@ -12,7 +12,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_matches-regex", "");
-			assert.throws(() => {testVal.v_matchesRegex(testInput, "troubadour")}, Error);
+			assert.throws(() => {testVal.v_matchesRegex(testInput, "troubadour", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -20,7 +20,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_matchesRegex = "/.*/";
-			assert.ok(!testVal.v_matchesRegex(testInput, undefined));
+			assert.ok(!testVal.v_matchesRegex(testInput, undefined, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -28,7 +28,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_matchesRegex = "/.*/";
-			assert.ok(!testVal.v_matchesRegex(testInput, null));
+			assert.ok(!testVal.v_matchesRegex(testInput, null, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -36,7 +36,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_matchesRegex = "/betAlpha.*/";
-			assert.ok(!testVal.v_matchesRegex(testInput, "alphabet soup"));
+			assert.ok(!testVal.v_matchesRegex(testInput, "alphabet soup", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -44,7 +44,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_matchesRegex = "/alphabet.*/";
-			assert.ok(testVal.v_matchesRegex(testInput, "alphabet soup"));
+			assert.ok(testVal.v_matchesRegex(testInput, "alphabet soup", " "));
 			assert.ok(!testInput.validity.customError);
 			done();
 		});
@@ -52,7 +52,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.dataset.v_matchesRegex = "alphabet.*";
-			assert.ok(testVal.v_matchesRegex(testInput, "alphabet soup"));
+			assert.ok(testVal.v_matchesRegex(testInput, "alphabet soup", " "));
 			assert.ok(!testInput.validity.customError);
 			done();
 		});
