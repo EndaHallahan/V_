@@ -1,6 +1,6 @@
 import {strict as assert} from "assert";
 import {JSDOM} from "jsdom";
-import {v_ify, V_} from "../src/v_.js";
+import {v_ify, V_} from "../src/js/v_.js";
 
 describe("Validation Unit Tests", () => {
 	const { document } = (new JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
@@ -19,7 +19,7 @@ describe("Validation Unit Tests", () => {
 			testInput2.setAttribute("name", "testInput2");
 			testInput2.value = "test string";
 			testSubForm.appendChild(testInput2);
-			assert.throws(() => {!testVal.v_matchesField(testInput, "test string")}, Error);
+			assert.throws(() => {!testVal.v_matchesField(testInput, "test string", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -34,7 +34,7 @@ describe("Validation Unit Tests", () => {
 			testInput2.setAttribute("name", "testInput2");
 			testInput2.value = "test string";
 			testSubForm.appendChild(testInput2);
-			assert.throws(() => {!testVal.v_matchesField(testInput, "test string")}, Error);
+			assert.throws(() => {!testVal.v_matchesField(testInput, "test string", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -49,7 +49,7 @@ describe("Validation Unit Tests", () => {
 			testInput2.setAttribute("name", "faultyInput");
 			testInput2.value = "test string";
 			testSubForm.appendChild(testInput2);
-			assert.throws(() => {!testVal.v_matchesField(testInput, "test string")}, Error);
+			assert.throws(() => {!testVal.v_matchesField(testInput, "test string", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -64,7 +64,7 @@ describe("Validation Unit Tests", () => {
 			testInput2.setAttribute("name", "testInput2");
 			testInput2.value = "test string";
 			testSubForm.appendChild(testInput2);
-			assert.ok(!testVal.v_matchesField(testInput, undefined));
+			assert.ok(!testVal.v_matchesField(testInput, undefined, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -79,7 +79,7 @@ describe("Validation Unit Tests", () => {
 			testInput2.setAttribute("name", "testInput2");
 			testInput2.value = "test string";
 			testSubForm.appendChild(testInput2);
-			assert.ok(!testVal.v_matchesField(testInput, null));
+			assert.ok(!testVal.v_matchesField(testInput, null, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -94,7 +94,7 @@ describe("Validation Unit Tests", () => {
 			testInput2.setAttribute("name", "testInput2");
 			testInput2.value = "test string";
 			testSubForm.appendChild(testInput2);
-			assert.ok(!testVal.v_matchesField(testInput, "wrong string"));
+			assert.ok(!testVal.v_matchesField(testInput, "wrong string", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -109,7 +109,7 @@ describe("Validation Unit Tests", () => {
 			testInput2.setAttribute("name", "testInput2");
 			testInput2.value = "test string";
 			testSubForm.appendChild(testInput2);
-			assert.ok(testVal.v_matchesField(testInput, "test string"));
+			assert.ok(testVal.v_matchesField(testInput, "test string", " "));
 			assert.ok(!testInput.validity.customError);
 			done();
 		});

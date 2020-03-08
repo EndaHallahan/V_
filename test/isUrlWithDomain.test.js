@@ -1,6 +1,6 @@
 import {strict as assert} from "assert";
 import {JSDOM} from "jsdom";
-import {v_ify, V_} from "../src/v_.js";
+import {v_ify, V_} from "../src/js/v_.js";
 
 describe("Validation Unit Tests", () => {
 	const { document } = (new JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
@@ -12,7 +12,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "");
-			assert.throws(() => {testVal.v_isUrlWithDomain(testInput, "https://www.twitter.com")}, Error);
+			assert.throws(() => {testVal.v_isUrlWithDomain(testInput, "https://www.twitter.com", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -20,7 +20,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www.twitter.com");
-			assert.ok(!testVal.v_isUrlWithDomain(testInput, undefined));
+			assert.ok(!testVal.v_isUrlWithDomain(testInput, undefined, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -28,7 +28,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www.twitter.com");
-			assert.ok(!testVal.v_isUrlWithDomain(testInput, null));
+			assert.ok(!testVal.v_isUrlWithDomain(testInput, null, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -36,7 +36,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www.twitter.com");
-			assert.ok(!testVal.v_isUrlWithDomain(testInput, "htps:/e.eeee.org/eeee.ee.e"));
+			assert.ok(!testVal.v_isUrlWithDomain(testInput, "htps:/e.eeee.org/eeee.ee.e", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -44,7 +44,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www\.twi.*");
-			assert.ok(!testVal.v_isUrlWithDomain(testInput, "https://www.twitter.com"));
+			assert.ok(!testVal.v_isUrlWithDomain(testInput, "https://www.twitter.com", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -52,7 +52,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www.twitter.com");
-			assert.ok(!testVal.v_isUrlWithDomain(testInput, "https://www.facebook.com/"));
+			assert.ok(!testVal.v_isUrlWithDomain(testInput, "https://www.facebook.com/", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -60,7 +60,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www.twitter.com");
-			assert.ok(!testVal.v_isUrlWithDomain(testInput, "https://www.facebook.com/a/www.twitter.com"));
+			assert.ok(!testVal.v_isUrlWithDomain(testInput, "https://www.facebook.com/a/www.twitter.com", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -68,7 +68,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www.about.twitter.com");
-			assert.ok(!testVal.v_isUrlWithDomain(testInput, "https://www.twitter.com"));
+			assert.ok(!testVal.v_isUrlWithDomain(testInput, "https://www.twitter.com", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -76,7 +76,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www.twitter.com");
-			assert.ok(testVal.v_isUrlWithDomain(testInput, "https://www.twitter.com"));
+			assert.ok(testVal.v_isUrlWithDomain(testInput, "https://www.twitter.com", " "));
 			assert.ok(!testInput.validity.customError);
 			done();
 		});
@@ -84,7 +84,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-url-with-domain", "www.twitter.com");
-			assert.ok(testVal.v_isUrlWithDomain(testInput, "http://www.twitter.com"));
+			assert.ok(testVal.v_isUrlWithDomain(testInput, "http://www.twitter.com", " "));
 			assert.ok(!testInput.validity.customError);
 			done();
 		});

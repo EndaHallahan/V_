@@ -1,6 +1,6 @@
 import {strict as assert} from "assert";
 import {JSDOM} from "jsdom";
-import {v_ify, V_} from "../src/v_.js";
+import {v_ify, V_} from "../src/js/v_.js";
 
 describe("Validation Unit Tests", () => {
 	const { document } = (new JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
@@ -12,7 +12,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-email-with-domain", "");
-			assert.throws(() => {testVal.v_isEmailWithDomain(testInput, "gmail.com")}, Error);
+			assert.throws(() => {testVal.v_isEmailWithDomain(testInput, "gmail.com", " ")}, Error);
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -20,7 +20,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-email-with-domain", "gmail.com");
-			assert.ok(!testVal.v_isEmailWithDomain(testInput, undefined));
+			assert.ok(!testVal.v_isEmailWithDomain(testInput, undefined, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -28,7 +28,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-email-with-domain", "gmail.com");
-			assert.ok(!testVal.v_isEmailWithDomain(testInput, null));
+			assert.ok(!testVal.v_isEmailWithDomain(testInput, null, " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -36,7 +36,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-email-with-domain", "gmail.com");
-			assert.ok(!testVal.v_isEmailWithDomain(testInput, "alphabet soup"));
+			assert.ok(!testVal.v_isEmailWithDomain(testInput, "alphabet soup", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -44,7 +44,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-email-with-domain", "gmail.com");
-			assert.ok(!testVal.v_isEmailWithDomain(testInput, "e.ee.eeeee@ee.eee.ee.gmail.com"));
+			assert.ok(!testVal.v_isEmailWithDomain(testInput, "e.ee.eeeee@ee.eee.ee.gmail.com", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -52,7 +52,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-email-with-domain", "g.*");
-			assert.ok(!testVal.v_isEmailWithDomain(testInput, "test@gmail.com"));
+			assert.ok(!testVal.v_isEmailWithDomain(testInput, "test@gmail.com", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -60,7 +60,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-email-with-domain", "notgmail.com*");
-			assert.ok(!testVal.v_isEmailWithDomain(testInput, "test@gmail.com"));
+			assert.ok(!testVal.v_isEmailWithDomain(testInput, "test@gmail.com", " "));
 			assert.ok(testInput.validity.customError);
 			done();
 		});
@@ -68,7 +68,7 @@ describe("Validation Unit Tests", () => {
 			const testInput = document.createElement("INPUT");
 			testInput.setAttribute("type", "text");
 			testInput.setAttribute("data-v_is-email-with-domain", "gmail.com");
-			assert.ok(testVal.v_isEmailWithDomain(testInput, "test@gmail.com"));
+			assert.ok(testVal.v_isEmailWithDomain(testInput, "test@gmail.com", " "));
 			assert.ok(!testInput.validity.customError);
 			done();
 		});

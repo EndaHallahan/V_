@@ -25,7 +25,7 @@ No more JQuery. No more mess. No more writing individual functions for each and 
 
 *That's it.*
 
-V\_ is also very lightweight. Minified, the script is 11kb. After gzip, it's about 3.
+V\_ is also very lightweight. Minified, the script is 12kb. After gzip, it's about 3.
 
 *Important note: V_ is meant to be used in tandem with server-side validation. Client-side form validation is **not** a secure replacement for server-side processing. You should always validate any user input on the server before working with it.*
 
@@ -116,7 +116,7 @@ The following can be specified on `label` elements with child inputs:
 | `data-v_char-counter` | This data attribute provides a built-in character counter that works with either `v_length-less-than` or the HTML `maxlength` attribute. The current character count is written to the `data-v_char-counter` attribute itself, in the format "(current length)/(max length)". not only with Javascript, but also with CSS via attribute selectors. You can even use the `::after` and `::before` pseudo-elements to automatically display the current count onto the page. | `<label data-v_char_counter> <textarea data-v_length-less-than="255"></textarea> </label>` |
 | `data-v_password-output` | This data attribute copies the `data_v-password-strength` attribute of an input with the `data-v_password-strength-requirement` or `data-v_password-zxcvbn-requirement` validations. This can be useful for CSS purposes, since input elements cannot have `::after` pseudo-elements. | `<label data-v_password-output> <input type="password" data-v_password-strength-requirement> <label>` |
 
-Additionally, V\_ comes with some optional default CSS in v_ui.css, which sets up basic styling of these features for you. Use it as a starting point if you want, or as point of reference.
+Additionally, V\_ comes with some optional default CSS in v_ui.css, which sets up basic styling of these features for you. Use it as a starting point if you want, or as point of reference, or not at all.
 
 ## Exports
 
@@ -124,26 +124,54 @@ V_ exports, or makes available globally to the page, two items: the `V_` class a
 
 ### The `V_` Object
 
-Under the hood, V\_ is really just the application of V_ objects to forms. You can do this yourself using the V\_ constructor:
+#### Constructor
+
+Under the hood, V\_ is really just the application of V\_ objects to forms. You can do this yourself using the V\_ constructor:
+
+| Function | Description |
+| ---------|------------ |
+| `new V_([form][options])` | Creates a new V\_ object. `form` is an HTML form element; if specified, validations will be automatically applied to that form. `options` is an object containing properties that affect how the V_ object functions; see below for more information. |
 
 ```Javascript
 	let validator = new V_();
 ```
 
-The constructor can also be called on a form, which will automatically set up validations for you:
+The constructor can be called on a form, which will automatically set up validations for you:
 
 ```Javascript
 	let validator = new V_(myFormElement);
 ```
 
-If you do not want to do this, you can use the `setValidations` method, which takes a form element as an argument:
+You can also pass an options object to the constructor:
+
+```Javascript
+	let validator = new V_({
+		messages: {
+			// Can be used to specify custom validation faliure messages on a per-validation basis. Ex:
+			v_isInteger: "Please enter a number.",
+			v_isEmail: "Email address, if you please.",
+		}
+	});
+```
+
+#### Methods
+
+In addition to passing a form to the constructor, validations can also be set using the `setValidations` method, which takes a form element as an argument:
+
+| Function | Description |
+| ---------|------------ |
+| `V_.setValidations(form)` | Applies validations to `form`. |
 
 ```Javascript
 	let validator = new V_();
 	validator.setValidations(myFormElement);
 ```
 
-This is useful for setting up custom validations of your own using the `addCustomValidations` function. The `addCustomValidations` function takes an object that describes a validation and attatches it to the object instance of V\_ you're calling it on. It can then be used the same way as any other V\_ validation, and can be attached to an input through a data attribute.
+This is useful for setting up custom validations of your own using the `addCustomValidation` function. The `addCustomValidation` function takes an object that describes a validation and attatches it to the object instance of V\_ you're calling it on. It can then be used the same way as any other V\_ validation, and can be attached to an input through a data attribute.
+
+| Function | Description |
+| ---------|------------ |
+| `V_.addCustomValidation(descriptionObject)` | Creates a custom validation and attatches it to the V_ object. |
 
 The description object has three fields:
 
@@ -191,5 +219,5 @@ In the default v_.js and v_.min.js files, this function is called without an arg
 
 ## Contributing
 
-Glad to have you! Feel free to open issues or make pull requests. If adding a validation, please include the name of your validation in the title of the pull request. To build the project, use `$ npm run-script build`, and to run the test suite, use `$ npm test`.
+Glad to have you! Feel free to open issues or make pull requests. We're particularly interested in making V_ multi-lingual, so if you know another language or languages, translations are very welcome. If adding a new validation, please include the name of your validation in the title of the pull request. To build the project, use `$ npm run-script build`, and to run the test suite, use `$ npm test`.
 
