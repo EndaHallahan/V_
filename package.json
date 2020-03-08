@@ -9,13 +9,16 @@
   ],
   "homepage": "https://endahallahan.github.io/V_/",
   "repository": "https://github.com/EndaHallahan/V_",
-  "main": "src/js/V_.js",
+  "main": "src/js/nodeEntry.js",
   "scripts": {
     "test": "mocha --require esm",
     "build": "webpack --config webpack.config.js"
   },
   "author": "rb_",
   "license": "MIT",
+  "dependancies": {
+    "esm": "^3.2.25"
+  },
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
