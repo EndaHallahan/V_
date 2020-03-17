@@ -1,4 +1,4 @@
-import failMessages from "./defaultMessages.json";
+const failMessages = require("./defaultMessages.json");
 
 class V_ {
 	constructor(formOrOpts, opts) {
@@ -488,4 +488,7 @@ function v_ify(form) {
 	}
 }
 
-export {v_ify, V_}
+module.exports = {
+	V_: V_,
+	v_ify: v_ify
+}

@@ -1,11 +1,11 @@
-import {strict as assert} from "assert";
-import {JSDOM} from "jsdom";
-import {v_ify, V_} from "../src/js/v_.js";
+const assert = require("assert");
+const jsdom = require("jsdom");
+const v_ = require("../");
 
 describe("Validation Unit Tests", () => {
-	const { document } = (new JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
+	const { document } = (new jsdom.JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
 	const testForm = document.createElement("FORM");
-	const testVal = new V_(testForm);
+	const testVal = new v_.V_(testForm);
 
 	describe("v_is-image-link", () => {
 		it("should not pass if value is undefined", (done) => {
