@@ -16,7 +16,7 @@ module.exports = {
   },
   mode: "production",
   target: "web",
-  watch: true,
+  //watch: true,
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'build')

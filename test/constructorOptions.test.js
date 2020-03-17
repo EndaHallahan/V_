@@ -1,25 +1,25 @@
-import {strict as assert} from "assert";
-import {JSDOM} from "jsdom";
-import {v_ify, V_} from "../src/js/v_.js";
+const assert = require("assert");
+const jsdom = require("jsdom");
+const v_ = require("../");
 
 describe("Validation Unit Tests", () => {
-	const window = (new JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
+	const window = (new jsdom.JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
 	const { document } = window;
 
 	describe("Constructor Options", () => {
 		it("should be able to take an options object in the constructor", (done) => {
-			const testVal = new V_({});
+			const testVal = new v_.V_({});
 			const testForm = document.createElement("FORM");
 			testVal.setValidations(testForm);
 			done();
 		});
 		it("should be able to take an options object with a form element in the constructor", (done) => {
 			const testForm = document.createElement("FORM");
-			const testVal = new V_(testForm, {});
+			const testVal = new v_.V_(testForm, {});
 			done();
 		});
 		it("should be able to take an options object with a messages option and apply it", (done) => {
-			const testVal = new V_({
+			const testVal = new v_.V_({
 				messages: {
 					v_isEmail: "Email address, if you please."
 				}
