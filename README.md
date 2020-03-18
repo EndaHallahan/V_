@@ -19,7 +19,7 @@ No more JQuery. No more mess. No more writing individual functions for each and 
 
 ```HTML
 	<form data-v_form>
-		<input type="text" v_is-url>
+		<input type="text" data-v_is-url>
 	</form>
 ```
 
