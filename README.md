@@ -25,7 +25,7 @@ No more JQuery. No more mess. No more writing individual functions for each and 
 
 *That's it.*
 
-V\_ is also very lightweight. Minified, the script is 12kb. After gzip, it's about 3.
+V\_ is also very lightweight. Minified, the script is 12kb. After gzip, [it's about 3](https://bundlephobia.com/result?p=v_underscore@latest).
 
 *Important note: V_ is meant to be used in tandem with server-side validation. Client-side form validation is **not** a secure replacement for server-side processing. You should always validate any user input on the server before working with it.*
 
